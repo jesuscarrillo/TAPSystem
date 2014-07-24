@@ -5,7 +5,7 @@ $this->pageTitle = Yii::app()->name;
 $baseUrl = Yii::app()->theme->baseUrl;
 
 if (Yii::app()->user->isGuest)
-    $this->redirect('cruge/ui/login');
+    $this->redirect('cruge/ui/login.tap');
 ?>
 <?php
 $gridDataProvider = new CArrayDataProvider(array(
