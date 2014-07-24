@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato_Acta_Evaluación_Pasantia2_subreport1" language="groovy" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="4"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idtap" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT GROUP_CONCAT(CONVERT( value
+USING utf8 ) SEPARATOR '                                                           ') as TutorJurados
+FROM TAP tap
+JOIN Evaluador ev ON ( tap.id = ev.TAP_id )
+JOIN cruge_fieldvalue cf ON ( ev.Usuario_id = cf.iduser )
+WHERE tap.id =$P{idtap}
+AND cf.idfield =1
+AND (
+ev.Rol_name = 'tutor'
+OR ev.Rol_name = 'jurado_uno'
+OR ev.Rol_name = 'jurado_dos'
+)]]>
+	</queryString>
+	<field name="TutorJurados" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="258" y="25" width="200" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Jurado 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="10" width="51" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prof. (a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="10" width="51" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prof. (a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="25" width="155" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Tutor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="25" width="197" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Jurado 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="10" width="51" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prof. (a)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="61" y="10" width="646" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TutorJurados}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

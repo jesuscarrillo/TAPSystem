@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato_Jurado_Evaluador_Pasantia2" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="45" bottomMargin="45" uuid="9052195d-b604-4f31-8dff-421bb7652bc2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="74f90cb8-8dc8-42d4-b1de-1c6dc7029258"/>
+	<parameter name="idtap" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (select DATE_FORMAT(curdate(),'%d de  %M  %Y'))as Fecha_Completa,GROUP_CONCAT(CONVERT(value USING utf8) SEPARATOR ' C.I: ') as Pasante,detalle as Titulo,(select CONVERT(value USING utf8) from cruge_authassignment ca join cruge_fieldvalue fv on(ca.userid = fv.iduser) where ca.itemname='jefe_departamento' and fv.idfield=1) as JefeDepartamento,(select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='jurado_uno' and tap.id=$P{idtap} and idfield=1)as Jurado1, (select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='jurado_dos' and tap.id=$P{idtap} and idfield=1)as Jurado2, (select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='jurado_suplente' and tap.id=$P{idtap} and idfield=1)as JuradoSuplente, (select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='Tutor' and tap.id=$P{idtap} and idfield=1)as Tutor from TAP tap join tap_ica ti on(tap.id=ti.TAP_id) join Caracteristica ca on(ti.Caracteristica_id=ca.id) join Tesis te on(tap.id = te.TAP_id) join cruge_fieldvalue cf on(te.Usuario_id=cf.iduser) where ti.TAP_id=$P{idtap} and ca.nombre='titulo' group by cf.iduser]]>
+	</queryString>
+	<field name="Fecha_Completa" class="java.lang.String"/>
+	<field name="Pasante" class="java.lang.String"/>
+	<field name="Titulo" class="java.lang.String"/>
+	<field name="JefeDepartamento" class="java.lang.String"/>
+	<field name="Jurado1" class="java.lang.String"/>
+	<field name="Jurado2" class="java.lang.String"/>
+	<field name="JuradoSuplente" class="java.lang.String"/>
+	<field name="Tutor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement uuid="09b0efe9-f798-4cb4-b1eb-05e9fc868e96" x="1" y="-34" width="133" height="68"/>
+				<imageExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\img\\LogoRBV.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0799aa03-33ff-45b7-bebc-81e8aba85d5b" x="246" y="0" width="84" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[San Cristóbal,]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5ca2ca19-7a15-4a9e-82cf-09f0b184ece4" x="317" y="0" width="112" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_Completa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="534" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4b752252-a77c-4c73-9cbc-42d8f9c94db5" x="0" y="0" width="53" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prof(a).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f11f82d8-8ba3-45ee-9ab4-c411b4a163c8" x="0" y="20" width="53" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Presente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea9bfa44-d077-4abe-81c5-d2ed0468c3b6" x="0" y="442" width="442" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[              Atentamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="092ff065-073f-4c34-b2e7-51ddd42947a6" x="0" y="516" width="442" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Jefe del Departamento de Ing. en Informática]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fac774f1-758c-4f3a-b5e5-3b77284c7d35" x="0" y="426" width="442" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[	Sin otro particular y en espera de su receptividad a lo solicitado, quedo de Ud.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fe3e3dc2-8055-4380-97a8-4768a74a9e36" x="0" y="187" width="442" height="78"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[	Agradezco notificar a este Departamento lo contemplado en el <b>Art. 66</b> de las respectivas Normas, así como la valiosa cooperación que tenga a bien brindar a la función encomendada, y quedamos a sus gratas órdenes para cualquier información al respecto.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f8ac3a31-edac-441c-8af8-813a58881c96" x="48" y="0" width="367" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Jurado1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="495977e9-cdae-4dc0-a795-bf5c2850cc91" x="0" y="496" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JefeDepartamento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="9c69df37-1316-4b9a-85f3-4c11e1b2467b" x="1" y="50" width="441" height="124"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["	Me dirijo a usted en la oportunidad de informarle que se le ha designado como Jurado Principal del Trabajo de Aplicación Profesional (pasantía): <b>"+$F{Titulo}+"</b> cuyo autor es el Bachiller: <b>" +$F{Pasante}+ "</b>, tutoreado por el Prof.(a) <b>"+$F{Tutor}+".</b> Compartiendo el rol de jurado evaluador se encuentra, el Prof.(a).<b>"+$F{Jurado2}+"</b> y como Jurado Suplente el Prof.(a) <b>"+$F{JuradoSuplente}+"</b>, dando así cumplimiento al Art. 63 de las Normas para la realización del Proyecto de Grado."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="741a4135-c307-4aff-94b5-7b118935aec9" x="1" y="248" width="441" height="20"/>
+				<textElement markup="html">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>Artículo 66.</b> El Jurado dispone de un lapso de hasta diez (10) hábiles para revisar el Documento Final del Trabajo de Pasantía Profesional; luego de la participación sobre su culminación por parte del tutor académico. Luego de revisado el Documento, el Jurado se reunirá convocado por el Tutor, y comunicará al pasante mediante acta las observaciones si las hubiere. <br><br> <b>Parágrafo Primero:</b> En caso de que uno de los jurados reciba más de cuatro (4) Documentos para revisar simultáneamente, dispondrá de hasta 15 días hábiles. <br><br> <b>Parágrafo Segundo:</b> El departamento emitirá las comunicaciones respectivas para el cumplimiento del presente artículo." ]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8bf50f60-ef4e-4eab-837e-87c45008d667" x="0" y="7" width="442" height="34" forecolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Edificio Administrativo: Avda. Universidad - Paramillo, Teléfono: 530422,  Apartado: 436 , San Cristóbal, Estado Táchira
+Oficina de Enlace: Parque Central Edificio Catuche. Nivel de Oficinas 1 – Oficinas 111 – 112
+Teléfono: 577-12-16 – Fax: 577-00-80 Caracas – Distrito Federal, Venezuela
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="753ac588-06ea-44fa-acb3-1758e03bbd45" x="0" y="3" width="442" height="1" forecolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

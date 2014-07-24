@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="702" leftMargin="70" rightMargin="70" topMargin="28" bottomMargin="28" uuid="ecd59daa-6ce1-4600-a998-bbe194867427">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="54"/>
+	<property name="ireport.y" value="111"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="cbdf02f9-5c09-4df6-9287-09eaf9169e6f"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idtap" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select GROUP_CONCAT(CONVERT(value USING utf8) SEPARATOR '                                 ')as DatosPersonales,ti.detalle as Titulo,te.nombre as TutorExterno,em.nombre as NombreEmpresa,tap.fechaFin as Fecha_Presentación,lapsoFin from TAP tap join inscripcion ins on(tap.id = ins.TAP_id) join cruge_fieldvalue cf on(ins.Usuario_id=cf.iduser) join Pasantia pa on(tap.id = pa.TAP_id) join TutorExterno te on(pa.TutorExterno_id = te.id) join Direccion di on(te.Direccion_id = di.id) join Empresa em on(di.Empresa_id = em.id) join tap_ica ti on(tap.id = ti.TAP_id) join Caracteristica ca on(ti.Caracteristica_id = ca.id ) where (cf.idfield=1 or cf.idfield=2) and ca.nombre='titulo' and tap.id=$P{idtap}]]>
+	</queryString>
+	<field name="DatosPersonales" class="java.lang.String"/>
+	<field name="Titulo" class="java.lang.String"/>
+	<field name="TutorExterno" class="java.lang.String"/>
+	<field name="NombreEmpresa" class="java.lang.String"/>
+	<field name="Fecha_Presentación" class="java.util.Date"/>
+	<field name="lapsoFin" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement uuid="3a10f776-5ef4-407f-8b29-a6ea65017670" x="1" y="-14" width="264" height="68"/>
+				<imageExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\img\\LogoRBV.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="4eabfc65-e723-4bd4-a889-f2636882f6f7" x="471" y="0" width="231" height="34" forecolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento de Ingeniería en Informática Trabajo de Apliación Profesiona;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9fcf458c-d880-4533-85cc-98bcedfdd661" x="1" y="66" width="701" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evaluación de Pasantías Profesionales]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="384" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="5acbb46b-079c-4c07-a8b1-6e5cfe32dcf7" x="0" y="0" width="409" height="15" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6dc422f7-9b2b-423d-9fc0-0d81600e4d97" x="0" y="15" width="299" height="15" backcolor="#FFFFFF"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="849e2def-dbf8-449b-b253-2fdfd4fd486d" x="299" y="15" width="110" height="15" backcolor="#FFFFFF"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="1748c7fa-c47d-43d9-9211-6db145f8e405" x="0" y="30" width="409" height="15" backcolor="#FFFFFF"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d7efec9f-582f-459f-9138-d29a9605dd40" x="471" y="0" width="231" height="15" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f14ce27b-1565-41c9-91ff-38e79d280359" x="585" y="15" width="117" height="30" backcolor="#FFFFFF"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7a070d73-2e89-4c29-9980-923e2b5508dc" x="471" y="15" width="114" height="30" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="3d587068-60cd-404e-999e-402a559185b1" mode="Transparent" x="1" y="56" width="38" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Título:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98573e21-94a5-46db-8a92-b844c8e3e63f" mode="Transparent" x="0" y="15" width="113" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres y Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abbcc7c5-e9c6-4737-b19e-7ebd5721fea3" mode="Transparent" x="1" y="30" width="122" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa u Organismo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="516d1891-b84d-4bd9-9520-eec298126c00" x="299" y="15" width="22" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.I:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c98c94b9-5417-455c-b49e-0e6ec7037538" mode="Transparent" x="471" y="15" width="114" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9b9d90c3-bb89-467e-b522-10fed00c2f35" mode="Transparent" x="585" y="15" width="117" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lapso Académico:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="2ded4ad7-e674-4f71-8210-bf11deba24e9" x="1" y="95" width="88" height="26" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="ac4ffb74-2a30-4702-adab-e324c5b8a8f0" x="89" y="95" width="188" height="26" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c85bb12c-ceda-4109-9c01-0b0461a7a669" x="277" y="95" width="293" height="26" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="ea9d9897-3217-4b80-a97a-ffff070bbc2f" x="570" y="95" width="73" height="26" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="648d35af-74f3-4bb6-b615-a1733fe560d0" x="643" y="95" width="59" height="26" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d89cd282-665e-4579-9154-7d3e52ebfde0" x="1" y="121" width="88" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3d10c00a-c44e-4cbd-82b5-52616a4e2104" x="89" y="121" width="188" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="680e7a5f-72f6-46da-ac5b-711009acc7c2" x="89" y="151" width="188" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="db910d23-263b-4c99-9328-d80946fa01f6" x="277" y="121" width="228" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a12a69af-979c-408f-9bb3-c0e4c299bc85" x="505" y="121" width="65" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7246c519-2717-4514-9c39-d8c125fc52c1" x="277" y="151" width="228" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8ca82a4e-910c-4583-a0f8-6cc9a756cdd0" x="505" y="151" width="65" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="eed7c8e7-898c-4999-898e-427923bf1274" x="570" y="151" width="75" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b210fa4f-ba42-4f9b-b16c-91896e010fc0" x="570" y="121" width="75" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="36b87409-fd03-4081-bd8d-886b73e02656" x="643" y="151" width="59" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="974f5c7e-358b-49dd-950d-19e169e129ae" x="643" y="121" width="59" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="438b7c9a-201c-4500-bcb9-e9af0c46910b" x="1" y="171" width="276" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c7111a93-d159-4343-9470-c86fa8b9d55b" x="277" y="171" width="70" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e2336aa0-9add-4802-b446-3f7273edc99a" x="347" y="171" width="78" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="168e7b10-0d94-4b46-9dca-90cdd52e477b" x="505" y="171" width="65" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0ba8e395-e0f8-4384-900d-d3748777f279" x="570" y="171" width="75" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6426538d-cf07-45a7-a321-6ca165822930" x="643" y="171" width="59" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="da61f20b-e016-4f20-8a52-9a74bb675847" x="89" y="191" width="188" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c5e8f934-7351-4891-9423-e3e4999fcb24" x="570" y="211" width="75" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="deac0f0b-43a7-4036-bad0-586292cfd48b" x="505" y="211" width="65" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="484538b2-8e0c-429f-914c-6b9502988a5b" x="277" y="191" width="228" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b8579572-e877-41a6-8cf9-b6eb7c5aa2f1" x="505" y="191" width="65" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="eade465b-397f-402a-b224-78057fef265e" x="89" y="211" width="188" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="cd9bc0bb-ad0b-451d-9705-58c3f310ed4a" x="1" y="191" width="88" height="40"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="068c4ae0-9731-4eb2-826f-a6eeb540324d" x="570" y="191" width="75" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b309bc85-d895-448a-b5c8-4da647c7115a" x="277" y="211" width="228" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="22609fe0-3fff-48cf-93fe-ebe34fdc09b5" x="1" y="231" width="569" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0983f835-5fea-4bac-acab-4e59bf54a906" x="570" y="231" width="75" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a9f68b2f-88fe-4b3a-b4a5-2c21a3000f9f" x="643" y="191" width="59" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="57e30169-b453-4939-84a5-8c8889f30ec4" x="643" y="211" width="59" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="dbc432e3-a5b4-43c8-9515-b75a93b483f0" x="643" y="231" width="59" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="13c337f1-c76b-4542-8b66-84441e6815e8" mode="Transparent" x="1" y="95" width="88" height="46"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Etapa de Pasantía]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6b9b98c5-b418-4c57-8055-16621978edfa" mode="Transparent" x="89" y="95" width="188" height="26"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aspecto a Evaluar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b63f7593-5e06-4ddd-89a6-c3da5041abd1" mode="Transparent" x="277" y="95" width="291" height="26"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tutor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="617bd626-0fb6-426c-a2e2-ded7511b98fd" mode="Transparent" x="568" y="95" width="77" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ponderación(5)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4fd42d10-2e24-4b99-ba51-fbaa9777ce99" mode="Transparent" x="643" y="95" width="59" height="26"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9be05961-d645-4140-a2a5-58f7984fc9ee" mode="Transparent" x="1" y="121" width="88" height="50"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Etapa de Permanencia (50%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8b86a975-04de-48b5-8200-24398560a7bc" mode="Transparent" x="89" y="121" width="188" height="30"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Evaluación académica en la empresa (Tutor Externo)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="459983d3-8fd8-4147-bec5-b3b4b516a360" mode="Transparent" x="505" y="128" width="31" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Nota:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e9089350-ee2f-4024-8384-ebdc5c30716f" mode="Transparent" x="505" y="151" width="31" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Nota:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="53292e36-1110-446a-a4c8-d72752f72a6f" mode="Transparent" x="1" y="191" width="88" height="50"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Etapa de Culminación (50%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c9be6407-b844-4dad-ab79-1fc6881e0c03" mode="Transparent" x="89" y="151" width="188" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Evaluación de Tutor Externo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9872ac6-9d83-48aa-894f-16f2d891ea3d" mode="Transparent" x="89" y="191" width="188" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Documento Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d9f4a25e-7568-4fbe-9c39-570fc2239fd9" mode="Transparent" x="89" y="211" width="188" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Defensa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e33fa83-7aa4-4dfc-84eb-71cdc6d96621" mode="Transparent" x="277" y="171" width="70" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tutor (1)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ed74aba-1a2c-4740-9af5-737daaf8b009" mode="Transparent" x="347" y="171" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jurado 1(2)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5974e12f-83a1-4093-9c97-0e3498aa4e7a" mode="Transparent" x="425" y="171" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jurado 2(3)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d50a26e-fd6d-4eaa-aeba-7314b66992df" mode="Transparent" x="505" y="171" width="65" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e88af836-7f50-4dc5-8a12-3a7f9d2f2830" mode="Transparent" x="505" y="181" width="65" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[[(1)+(2)+(3)]/3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ff0d24d7-238e-4be1-a7c6-c6107511f314" x="0" y="350" width="702" height="34" forecolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Edificio Administrativo: Avda. Universidad - Paramillo, Teléfono: 530422,  Apartado: 436 , San Cristóbal, Estado Táchira
+Oficina de Enlace: Parque Central Edificio Catuche. Nivel de Oficinas 1 – Oficinas 111 – 112
+Teléfono: 577-12-16 – Fax: 577-00-80 Caracas – Distrito Federal, Venezuela
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="34239570-df54-4ad6-9982-cac4d8ab369e" x="25" y="350" width="652" height="1" forecolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="cb674e58-c8e6-45fb-b3e4-58d2fafc70ea" mode="Transparent" x="1" y="231" width="569" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Calificación Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7ac2f0d4-00e7-4b96-ab09-8244beea56ce" mode="Transparent" x="570" y="131" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[30%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="888b1ee9-e5e5-4b3f-a10f-bfab4d1d8053" mode="Transparent" x="570" y="151" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[20%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="76745d8f-a942-4611-b40e-77a3c00c53af" mode="Transparent" x="572" y="191" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[35%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b8f54d4-3849-4bec-b364-558069ae1878" mode="Transparent" x="572" y="211" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[15%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad7983f0-1bb3-4070-b7ac-7fb231a760c4" mode="Transparent" x="277" y="128" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prof(a).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e18687c-ce19-4eaf-a33c-9de408df4f95" mode="Transparent" x="1" y="0" width="298" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos de las Pasantías Profesionales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="143a9ea3-101e-4a14-a103-25d44c950575" mode="Transparent" x="471" y="0" width="227" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos de la Presentación Pública]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f5195e25-aeb5-4c1f-848f-8c7158abfbbb" x="347" y="191" width="1" height="40"/>
+			</line>
+			<line>
+				<reportElement uuid="e6662094-0ab4-4c17-a00b-80608210b11f" x="425" y="191" width="1" height="40"/>
+			</line>
+			<subreport>
+				<reportElement uuid="f25f5053-8540-41c1-aa4d-bcb554242a5f" x="0" y="288" width="702" height="56"/>
+				<subreportParameter name="idtap">
+					<subreportParameterExpression><![CDATA[$P{idtap}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\" + "Formato_Acta_Evaluación_Pasantia2_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement uuid="45424d3b-8bb0-4ac2-a440-1ff39ad1cb9b" x="113" y="15" width="296" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DatosPersonales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ef587865-2415-477c-b86b-663dce5be60a" x="123" y="30" width="286" height="15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NombreEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5b860452-4811-4caa-9f10-7819c5b4349f" x="585" y="30" width="117" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lapsoFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="41cd3673-b031-46fb-8de5-a657e3f53ea7" x="321" y="128" width="184" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TutorExterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1e30ef03-cde6-40cb-b64c-0f6e4afd395e" x="41" y="56" width="661" height="39"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Titulo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="097025aa-269d-435b-8190-f38549cc34f1" x="471" y="30" width="114" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_Presentación}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

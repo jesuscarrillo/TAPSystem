@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato_Aceptacion_Pasantia" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="56" bottomMargin="56" uuid="138a5228-b011-49b8-b6f7-7e735f796c26">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="340"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="4bbe14f9-b6ad-4782-a1dc-ac8d999777a4"/>
+	<parameter name="idtap" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (select DATE_FORMAT(curdate(),'%d de  %M  %Y'))as Fecha_Completa,(select DATE_FORMAT(curdate(),'%d'))as Dia,(select DATE_FORMAT(curdate(),'%M'))as Mes,(select DATE_FORMAT(curdate(),'%Y'))as Anio,CONVERT(value USING utf8) as Pasante, DATE_FORMAT(fechaAprobacion,'%d/%m/%y') as Fecha_Aprobacion,lapsoInicio, (select detalle from tap_ica ti join  Caracteristica ca on(ti.Caracteristica_id=ca.id) where ti.TAP_id=$P{idtap} and ca.nombre='titulo') as Titulo, (select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='Tutor' and tap.id=$P{idtap} and idfield=1) as Tutor, (select email from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_user cu on(eva.Usuario_id=cu.iduser) where eva.Rol_name='Tutor' and tap.id=$P{idtap}) as Email_Tutor, (select CONVERT(value USING utf8) from cruge_authassignment ca join cruge_fieldvalue fv on(ca.userid = fv.iduser) where ca.itemname='coordinador_tap' and fv.idfield=1) as Coordinador_TAP from TAP tap join Inscripcion ic on(tap.id=ic.TAP_id) join cruge_fieldvalue cf on(ic.Usuario_id=cf.iduser) where tap.id=$P{idtap} and cf.idfield=1]]>
+	</queryString>
+	<field name="Fecha_Completa" class="java.lang.String"/>
+	<field name="Dia" class="java.lang.String"/>
+	<field name="Mes" class="java.lang.String"/>
+	<field name="Anio" class="java.lang.String"/>
+	<field name="Pasante" class="java.lang.String"/>
+	<field name="Fecha_Aprobacion" class="java.lang.String"/>
+	<field name="lapsoInicio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Titulo" class="java.lang.String"/>
+	<field name="Tutor" class="java.lang.String"/>
+	<field name="Email_Tutor" class="java.lang.String"/>
+	<field name="Coordinador_TAP" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement uuid="9895ffa9-bce8-47a1-88a3-fc539f871816" x="0" y="-34" width="133" height="68"/>
+				<imageExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\img\\LogoRBV.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="812cac4f-9bb5-4189-9056-6b0f75450502" x="262" y="0" width="76" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[San Cristóbal,]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c4dd173b-ba98-48c5-8c1f-fe62ccca4f14" x="338" y="0" width="104" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_Completa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="499" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3120a196-24a2-4992-89ea-e5a68048d55d" x="0" y="0" width="53" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atención]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c168eed4-d14f-44dd-a2f4-19596a44b1dd" x="0" y="20" width="28" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Br.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09255b38-cf4e-401c-9f57-881ca896b5fe" x="0" y="245" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Atentamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1799ac88-bb15-4393-9d09-a48c6a8bd3fe" x="0" y="413" width="442" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Coordinador de la Comisión de Trabajo de Aplicación Profesional (TAP)
+Departamento de Informática - UNET
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="01d441da-e9c3-41ef-8145-ea3ad770457b" x="0" y="162" width="442" height="36"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[	Es importante recordar que debe comunicarse con su Tutor Académico, a fin de que discutan el plan de trabajo a desarrollar antes del inicio de pasantías.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="03f30611-ae91-457d-b040-876a225e1010" x="0" y="213" width="442" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[	Sin otro particular a que hacer referencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="587ae9ec-fabe-4191-8b05-3963042f59ed" x="0" y="459" width="91" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Email del tutor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="44d75839-8bf2-4831-b206-4027de273adc" x="0" y="479" width="188" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Para comunicarse con la comisión:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="74f34a39-53f9-4701-81ef-c430e94cad92" x="85" y="459" width="295" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Email_Tutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="af7a6b88-a9cb-4f2e-ab45-17580e13b90d" x="24" y="20" width="388" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Pasante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ca9b07e4-050b-4651-8bb9-e079e7ff1368" x="0" y="393" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Coordinador_TAP}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="23977e86-8aef-4317-a9de-ebfbb37889df" mode="Opaque" x="0" y="43" width="442" height="21" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["	Por medio de la presente se le notifica que en reunión sostenida por la Comisión TAP del Departamento de Informática el día "+$F{Fecha_Aprobacion}+" se decidió Aceptar su propuesta de Trabajo de Aplicación Profesional, modalidad: Pasantia  titulada “"+$F{Titulo}+"” para el Lapso Académico "+$F{lapsoInicio}+", asignándosele como Tutor Académico al Prof (a). "+$F{Tutor}+"."]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0ce95f3b-c387-43f1-a52b-a195cd9f40a2" x="0" y="16" width="442" height="34" forecolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Edificio Administrativo: Avda. Universidad - Paramillo, Teléfono: 530422,  Apartado: 436 , San Cristóbal, Estado Táchira
+Oficina de Enlace: Parque Central Edificio Catuche. Nivel de Oficinas 1 – Oficinas 111 – 112
+Teléfono: 577-12-16 – Fax: 577-00-80 Caracas – Distrito Federal, Venezuela
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="396bc7ce-9f02-4c41-9e85-37319b45b4ee" x="0" y="11" width="442" height="1" forecolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

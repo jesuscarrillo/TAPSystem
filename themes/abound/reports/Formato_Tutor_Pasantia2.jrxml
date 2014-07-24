@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato_Tutor_Pasantia" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="45" bottomMargin="45" uuid="b73cf5db-4410-485a-88c7-f6589d335350">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="56"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="e96bdf15-e59f-4158-9809-8140e479ba64"/>
+	<parameter name="idtap" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (select DATE_FORMAT(curdate(),'%d de  %M  %Y'))as Fecha_Completa,(select CONVERT(value USING utf8) from cruge_authassignment ca join cruge_fieldvalue fv on(ca.userid = fv.iduser) where ca.itemname='jefe_departamento' and fv.idfield=1)as JefeDepartamento,(select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='Tutor' and tap.id=$P{idtap} and idfield=1)as Tutor, (select GROUP_CONCAT(CONVERT(value USING utf8) SEPARATOR ' C.I. ') from TAP tap join Tesis tes on(tap.id=tes.TAP_id) join cruge_fieldvalue cf on(tes.Usuario_id=cf.iduser) where tap.id=$P{idtap} group by iduser)as Tesista,(select detalle from tap_ica ti join  Caracteristica ca on(ti.Caracteristica_id=ca.id) where ti.TAP_id=$P{idtap} and ca.nombre='titulo')as Titulo from dual]]>
+	</queryString>
+	<field name="Fecha_Completa" class="java.lang.String"/>
+	<field name="JefeDepartamento" class="java.lang.String"/>
+	<field name="Tutor" class="java.lang.String"/>
+	<field name="Tesista" class="java.lang.String"/>
+	<field name="Titulo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e82c6590-bd49-4266-a567-6ffbcfc8244e" x="247" y="0" width="83" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[San Cristóbal,]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="6169c640-7f57-4b64-88a5-5df4566607f5" x="0" y="-120" width="133" height="68"/>
+				<imageExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\img\\LogoRBV.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="3f579c6a-3d52-41fc-8847-3311a1b045fb" x="319" y="0" width="112" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_Completa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="534" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="88d354b9-9a38-449e-bc39-1bb186e85ce8" x="0" y="0" width="53" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prof(a).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e8d5095-9aaf-45b0-85f5-914c76370580" x="0" y="20" width="53" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Presente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="37afff8f-70a7-413c-86e0-d793ddd2adc8" x="0" y="450" width="442" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[              Atentamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c342af42-9735-4af4-950d-e3b98981dcdc" x="0" y="517" width="442" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Jefe del Departamento de Ing. en Informática]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3d2eedac-70db-49ae-b1e2-49db4e8ad95b" x="0" y="434" width="442" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[	Sin otro particular y en espera de su receptividad a lo solicitado, quedo de Ud.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="df0b59e8-e314-4420-99e9-c27a4498c523" x="0" y="44" width="442" height="95"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Me dirijo a usted en la oportunidad de informarle que el Consejo de Departamento de Ingeniería Informática N° tal de fecha tal, le ha designado como Tutor Académico de la Pasantía Profesional titulada : <b>"+$F{Titulo}+"</b> cuyo autor  es  el  Bachiller: <b>"+$F{Tesista}+"</b>, dando así cumplimiento al <b>Art. 55</b> de las Normas para la realización del Proyecto de Grado."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8ba3d69a-c05c-4e54-a022-77a986b939e8" x="31" y="231" width="364" height="135"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[1. Revisar en conjunto con el Tutor externo, el Plan de Trabajo que ejecuta el Pasante durante su permanencia en el organismo o empresa receptora.
+2. Asesorar, orientar, y supervisar al Pasante durante la Pasantía Profesional.
+3. Evaluar al Pasante, junto al Tutor externo y el Supervisor (si es el caso), en cuanto al     cumplimiento y resultado del Plan de Trabajo.
+4. Realizar las funciones del Supervisor, en aquellos casos en los cuales no se haya designado un supervisor para tal fin.
+5. Revisar el documento final de Pasantías antes de su entrega al Departamento para su evaluación.
+6. Informar al departamento si el pasante es reprobado en la pasantía según lo establecido en estas normas.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="050f2557-982f-4187-b741-09bc968fa305" x="43" y="0" width="366" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Tutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="25316cd8-f7a2-4293-abb8-c64df4de570d" x="0" y="497" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JefeDepartamento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1d6d0cba-e69a-4a37-a65d-20d847cb7fe3" x="0" y="156" width="442" height="62"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="12" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agradezco notificar a este Departamento lo contemplado en el <b>Art. 59</b> de las respectivas Normas, así como la valiosa cooperación que tenga a bien brindar a la función encomendada, y quedamos a sus gratas órdenes para cualquier información al respecto."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e82f977f-3153-42a8-ac07-333a44639e44" x="0" y="211" width="347" height="20"/>
+				<textElement markup="html">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>Artículo 59.</b> Son funciones de los Tutores Académicos:"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3a5eb33b-51e2-4075-a474-d2660fbbf66a" x="0" y="7" width="442" height="34" forecolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Edificio Administrativo: Avda. Universidad - Paramillo, Teléfono: 530422,  Apartado: 436 , San Cristóbal, Estado Táchira
+Oficina de Enlace: Parque Central Edificio Catuche. Nivel de Oficinas 1 – Oficinas 111 – 112
+Teléfono: 577-12-16 – Fax: 577-00-80 Caracas – Distrito Federal, Venezuela
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d759b92b-4398-4f94-bca6-4040a2bee836" x="0" y="3" width="442" height="1" forecolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

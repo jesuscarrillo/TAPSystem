@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato_Jurado_Evaluador_Tesis2" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="45" bottomMargin="45" uuid="c6f5edd0-4e54-4f76-86f6-63b5b4f60d52">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="413"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="b6024788-db92-4211-95b3-32a8e6848189"/>
+	<parameter name="idtap" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (select DATE_FORMAT(curdate(),'%d de  %M  %Y'))as Fecha_Completa,GROUP_CONCAT(CONVERT(value USING utf8) SEPARATOR '  ') as Tesista,detalle as Titulo,(select CONVERT(value USING utf8) from cruge_authassignment ca join cruge_fieldvalue fv on(ca.userid = fv.iduser) where ca.itemname='jefe_departamento' and fv.idfield=1) as JefeDepartamento,(select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='jurado_uno' and tap.id=$P{idtap} and idfield=1)as Jurado1, (select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='jurado_dos' and tap.id=$P{idtap} and idfield=1)as Jurado2, (select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='jurado_suplente' and tap.id=$P{idtap} and idfield=1)as JuradoSuplente, (select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='Tutor' and tap.id=$P{idtap} and idfield=1)as Tutor from TAP tap join tap_ica ti on(tap.id=ti.TAP_id) join Caracteristica ca on(ti.Caracteristica_id=ca.id) join Tesis te on(tap.id = te.TAP_id) join cruge_fieldvalue cf on(te.Usuario_id=cf.iduser) where ti.TAP_id=$P{idtap} and ca.nombre='titulo' group by cf.iduser]]>
+	</queryString>
+	<field name="Fecha_Completa" class="java.lang.String"/>
+	<field name="Tesista" class="java.lang.String"/>
+	<field name="Titulo" class="java.lang.String"/>
+	<field name="JefeDepartamento" class="java.lang.String"/>
+	<field name="Jurado1" class="java.lang.String"/>
+	<field name="Jurado2" class="java.lang.String"/>
+	<field name="JuradoSuplente" class="java.lang.String"/>
+	<field name="Tutor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement uuid="5f18a61f-f632-4f13-99cc-10e718ba0460" x="0" y="-34" width="133" height="68"/>
+				<imageExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\img\\LogoRBV.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="bdd776aa-a885-468b-b160-723acec084a7" x="253" y="0" width="77" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[San Cristóbal,]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="73843c79-9b0b-4023-aa52-01b741070dc5" x="330" y="0" width="112" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_Completa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="551" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fe9b556b-d974-4e8c-8fd6-e076b05c202f" x="0" y="0" width="53" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prof(a).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="51b69c0e-3153-4b2e-8125-3113e3b1cc64" x="0" y="20" width="53" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Presente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eee1e382-c355-4568-94d9-db726c5d6377" x="-1" y="502" width="442" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[              Atentamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2b003ad-3d4e-4821-a10d-7a0ee4ca15cb" x="0" y="536" width="442" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Jefe del Departamento de Ing. en Informática]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ddd7653a-0ac9-45c1-be4c-1510d7846bd0" x="-1" y="483" width="442" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[	Sin otro particular y en espera de su receptividad a lo solicitado, quedo de Ud.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="07158a18-76be-471f-8828-e002da321d5f" x="47" y="0" width="357" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Jurado1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8db4b2d5-5c61-4812-9beb-7d87d723c5d4" x="0" y="517" width="441" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JefeDepartamento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="cff2f344-ba27-47e1-a14a-3feda746c0d2" x="1" y="48" width="441" height="124"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Me dirijo a usted en la oportunidad de informarle que se le ha designado como Jurado del Proyecto de Grado:<b> “"+$F{Titulo}+"”</b>, cuyo autor  es  el  Bachiller: <b>"+$F{Tesista}+"</b>, tutoreado por el Prof. <b>"+$F{Tutor}+"</b>, compartiendo el rol de jurado evaluador se encuentra, el Prof. <b>"+$F{Jurado2}+"</b>, y como Jurado Suplente el Prof. <b>"+$F{JuradoSuplente}+"</b>, dando así cumplimiento al <b>Art. 18</b> de las Normas para la realización del Proyecto de Grado."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="f98576cb-2bc2-4280-bf5d-0a68958aa186" x="1" y="165" width="441" height="33"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agradezco notificar a este Departamento lo contemplado en el <b>Art. 19</b> de las respectivas Normas, así como la valiosa cooperación que tenga a bien brindar a la función encomendada, y quedamos a sus gratas órdenes para cualquier información al respecto. <br><br><b>Artículo 19.</b> El jurado evaluará la Propuesta del Proyecto Especial de Grado en un lapso de seis (6) días hábiles contados a partir de la notificación de su designación, y deberá emitir un juicio de valor de la propuesta para aprobarla o no aprobarla. El jurado elaborará un acta con las decisiones, observaciones y acuerdos alcanzados en la evaluación de la Propuesta, indicando los criterios utilizados en la decisión. El tutor consignará el acta ante el departamento a más tardar dentro de los dos (2) días hábiles siguientes al vencimiento del lapso para la evaluación de la Propuesta.<br><br><b>Parágrafo Primero:</b> Si la evaluación de la propuesta es favorable, el Jurado deberá reunirse con el autor o autores para realizar una evaluación formativa con la finalidad de orientarlo(s) sobre el alcance y la ejecución del Proyecto Especial de Grado. Se podrán realizar sucesivas evaluaciones formativas de acuerdo a planificación y criterios establecidos por cada Departamento.<br><br><b>Parágrafo Segundo:</b> En el caso de que la Propuesta del Proyecto Especial de Grado no sea aprobada por el Jurado, el autor o los autores tendrán(n) hasta cinco (5) días hábiles para solicitar por escrito una reconsideración de la decisión ante el Consejo de Departamento."]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="196bc6cc-50cc-41b4-a115-0c86e3a9363a" x="0" y="7" width="442" height="34" forecolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Edificio Administrativo: Avda. Universidad - Paramillo, Teléfono: 530422,  Apartado: 436 , San Cristóbal, Estado Táchira
+Oficina de Enlace: Parque Central Edificio Catuche. Nivel de Oficinas 1 – Oficinas 111 – 112
+Teléfono: 577-12-16 – Fax: 577-00-80 Caracas – Distrito Federal, Venezuela
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="bbb8998c-3354-4841-9b31-d73a47484263" x="0" y="3" width="442" height="1" forecolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

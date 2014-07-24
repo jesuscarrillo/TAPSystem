@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Constancia_Tutor" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="56" bottomMargin="56" uuid="a97849cd-3174-4725-a071-9f9c3f13b31e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="17"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a12f6f32-1fd6-40a7-b4bf-66d217597fbe"/>
+	<parameter name="idtap" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (select DATE_FORMAT(curdate(),'%d de  %M  %Y'))as Fecha_Completa,(select DATE_FORMAT(curdate(),'%d'))as Dia,(select DATE_FORMAT(curdate(),'%M'))as Mes,(select DATE_FORMAT(curdate(),'%Y'))as Anio,(select CONVERT(value USING utf8) from cruge_authassignment ca join cruge_fieldvalue fv on(ca.userid = fv.iduser) where ca.itemname='jefe_departamento' and fv.idfield=1)as JefeDepartamento,(select CONVERT(value USING utf8) from TAP tap join Evaluador eva on(tap.id = eva.TAP_id) join cruge_fieldvalue cf on(eva.Usuario_id=cf.iduser) where eva.Rol_name='Tutor' and tap.id=$P{idtap} and idfield=1)as Tutor, (select GROUP_CONCAT(CONVERT(value USING utf8) SEPARATOR '      ') from TAP tap join Tesis tes on(tap.id=tes.TAP_id) join cruge_fieldvalue cf on(tes.Usuario_id=cf.iduser) where tap.id=$P{idtap} group by iduser)as Tesista,(select detalle from tap_ica ti join  Caracteristica ca on(ti.Caracteristica_id=ca.id) where ti.TAP_id=$P{idtap} and ca.nombre='titulo')as Titulo from dual]]>
+	</queryString>
+	<field name="Fecha_Completa" class="java.lang.String"/>
+	<field name="Dia" class="java.lang.String"/>
+	<field name="Mes" class="java.lang.String"/>
+	<field name="Anio" class="java.lang.String"/>
+	<field name="JefeDepartamento" class="java.lang.String"/>
+	<field name="Tutor" class="java.lang.String"/>
+	<field name="Tesista" class="java.lang.String"/>
+	<field name="Titulo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement uuid="a75f4aa8-da95-4186-810c-9ae51731d2a2" x="0" y="-34" width="133" height="68"/>
+				<imageExpression><![CDATA["C:\\xampp\\htdocs\\Com_Tap_Informatica\\themes\\abound\\reports\\img\\LogoRBV.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="e221fe24-6e5f-47aa-8f62-5e75f26fde79" x="334" y="53" width="108" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_Completa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8f8e02ca-051c-4d33-a467-618a755d2551" x="258" y="53" width="76" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[San Cristóbal,]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="03a74023-18c8-4671-adae-42ecd9e362d6" x="154" y="0" width="137" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C O N S T A N C I A]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="499" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1091af20-311b-48e3-ba40-c2a137869ba7" x="30" y="354" width="75" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Atentamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fe24a18f-06d3-4b9b-bf40-8b07a1b30440" x="0" y="476" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jefe del Departamento de Ing. Informática]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="386888ae-59c3-4aa5-9a65-27b7a6b0d995" x="0" y="86" width="105" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="86aa39a8-5235-4ef3-bd36-f290aa335b7b" x="105" y="86" width="225" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0a2f81f1-a8bc-4948-9ef6-e3a69f0639af" x="330" y="86" width="112" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="971347cb-0d31-405f-85a9-93b155724cbe" x="0" y="106" width="105" height="139"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="69ba054f-835c-4ff1-941e-be1dd4e0b745" x="105" y="106" width="225" height="139"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c5ed9495-b78b-4483-83c6-852b4ecd240b" x="330" y="106" width="112" height="139"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8369712d-d586-4736-9c3b-856f425214b4" x="330" y="106" width="112" height="23"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Tesista}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="77128cdd-fec0-4e95-8b41-675f9a098d7e" x="0" y="161" width="105" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[En Desarrollo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d5c83f24-b898-418f-9c3a-538bd70ccd8b" x="0" y="90" width="121" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de la Defensa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="99381d10-c979-4b23-b5cd-8db08da44cb5" x="105" y="90" width="225" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Título]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ff533028-7c9a-40e5-bcde-1d94ff694ae3" x="330" y="90" width="112" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Autor]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ed0ec315-922a-453e-b6ae-770bf8228ab1" x="0" y="456" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JefeDepartamento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="08aa7e77-c27b-47a1-8e55-8a8fbcf1e4a1" mode="Opaque" x="106" y="108" width="224" height="21" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Titulo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="7a34695d-4b5f-4a20-a700-8ed4a71871a3" mode="Opaque" x="1" y="0" width="442" height="21" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["		Quien suscribe, Prof.(a) "+$F{JefeDepartamento}+", Jefe del Departamento de Ingeniería Informática, hace constar que el Prof(a). "+$F{Tutor}+" es tutor del siguiente Trabajo de Aplicación Profesional, modalidad Tesis: "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8c7b384b-bdb0-46af-832d-1b605943a7de" mode="Opaque" x="0" y="272" width="442" height="21" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["		Constancia que se expide para los fines concernientes, en San Cristóbal, a los "+$F{Dia}+" días, del mes de "+$F{Mes}+" de "+$F{Anio}+"."]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8c7d9dfb-a59a-4572-bce1-b454c6247775" x="0" y="16" width="442" height="34" forecolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Edificio Administrativo: Avda. Universidad - Paramillo, Teléfono: 530422,  Apartado: 436 , San Cristóbal, Estado Táchira
+Oficina de Enlace: Parque Central Edificio Catuche. Nivel de Oficinas 1 – Oficinas 111 – 112
+Teléfono: 577-12-16 – Fax: 577-00-80 Caracas – Distrito Federal, Venezuela
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="c7be3f82-6258-452e-a353-4bb90c432243" x="0" y="11" width="442" height="1" forecolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

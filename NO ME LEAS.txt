@@ -1,0 +1,22 @@
+1.- EN LA CARPETA "database/MySql/" se encuentra el script que deben corren en la BD con
+un usuario de altos privilegios, el mismo creara el usuario correspondiente e identificado
+en el proyecto, por lo que lo unico que les queda por hacer es tener el proyecto en la 
+carpeta correcta en su servidor apache (NOTA 1).
+
+2.- CORRER EL SCRIPT CORRESPONDIENTE EN LA CARPETA "SCRIPTS" (NOTA 2), tener en cuenta que si su 
+servidor MySql no esta corriendo localmente, deben modificar el script con la direccion ip
+correspondiente a su servidor en la entrada "tapserver.local" para que el proyecto corra 
+sin ningun problema.
+
+Nota 1: es altamente recomendado que creen un servidor virtual con el alias "tapsystem.com"
+para mayor comodidad y que no tengan que modificar las conf del proyecto, sino saben hacerlo
+les dejo el siguiente link.
+
+Windows = http://es.kioskea.net/faq/4719-configurar-apache-y-windows-para-crear-un-host-virtual#simili_main
+Linux = http://www.regoremor.com/plataformas/linux/configuracion-de-virtualhost-en-linux-debian-con-apache2
+
+Son muy parecidas ambas configuraciones.
+
+Nota 2: Si estan en windows > a 7 recuerden correr el script como administradores, OJO en ninguno de los
+casos corran el script mas de una vez si no les dio errores, pues agregarian mas entradas de las necesarias
+en el archivo "hosts" y tendrian que editarlo uds mismos para reparar los errores.

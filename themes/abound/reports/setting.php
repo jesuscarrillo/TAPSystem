@@ -1,0 +1,9 @@
+<?php
+$server="tapserver.local";
+$db="tap3";
+$user="tap3";
+$pass="Software2014";
+//$version="0.9b";
+$pgport=3306;
+$pchartfolder="./class/pchart2";
+?>
